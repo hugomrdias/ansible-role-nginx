@@ -1,0 +1,4 @@
+localhost ansible_connection=local
+
+[vagrant]
+nginx.local ansible_ssh_user=vagrant ansible_ssh_host=192.168.11.20

@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+
+{% if nginx_distribution == 'stable' %}
+
+{% if ansible_os_family == 'Debian' %}
+
+deb http://nginx.org/packages/debian/ {{ansible_lsb.codename}} nginx
+deb-src http://nginx.org/packages/debian/ {{ansible_lsb.codename}} nginx
+
+{% endif %}
+
+{% if ansible_os_family == 'Ubuntu' %}
+
+deb http://nginx.org/packages/ubuntu/ {{ansible_lsb.codename}} nginx
+deb-src http://nginx.org/packages/ubuntu/ {{ansible_lsb.codename}} nginx
+
+{% endif %}
+
+{% else %}
+
+{% if ansible_os_family == 'Debian' %}
+
+deb http://nginx.org/packages/mainline/debian/ {{ansible_lsb.codename}} nginx
+deb-src http://nginx.org/packages/mainline/debian/ {{ansible_lsb.codename}} nginx
+
+{% endif %}
+
+{% if ansible_os_family == 'Ubuntu' %}
+
+deb http://nginx.org/packages/mainline/ubuntu/ {{ansible_lsb.codename}} nginx
+deb-src http://nginx.org/packages/mainline/ubuntu/ {{ansible_lsb.codename}} nginx
+
+{% endif %}
+
+{% endif %}

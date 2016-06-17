@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Hugo Dias
+  description: Nginx installation for Debian 8
+  company:
+  license: MIT
+  min_ansible_version: 2
+  platforms:
+    - name: Debian
+      versions:
+      - 8
+  galaxy_tags:
+    - nginx
+    - http
+
+dependencies: []
