@@ -33,7 +33,7 @@ https://wiki.debian.org/AptPreferences#Pinning
 
 ## nginx
 ### installing custom nginx build with nchan
-https://serversforhackers.com/compiling-third-party-modules-into-nginx
+https://serversforhackers.com/compiling-third-party-modules-into-nginx   
 https://github.com/slact/nchan/releases
 
 ```
