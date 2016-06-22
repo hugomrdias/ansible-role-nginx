@@ -1,7 +1,7 @@
 # ansible-role-nginx [![Build Status](https://travis-ci.org/hugomrdias/ansible-role-nginx.svg?branch=master)](https://travis-ci.org/hugomrdias/ansible-role-nginx)
-> Role to install Thumbor in Debian/Ubuntu systems
+> Role to install Thumbor in Debian systems
 
-This is for advanced users.
+This is for advanced users. This is only for Debian uses stretch sources to install nginx to enable http2 with ALPN support using openssh 1.0.2+
 
 ## Requirements
 None   
