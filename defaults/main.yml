@@ -1,8 +1,8 @@
 ---
 # defaults file for ansible-role-nginx
 
-nginx_user: vagrant
-nginx_group: vagrant
+nginx_user: root
+nginx_group: root
 nginx_distribution: mainline # mainline or stable
 nginx_package_name: nginx
 nginx_delete_default: True

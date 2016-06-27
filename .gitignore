@@ -2,3 +2,4 @@
 tests/roles/*
 !tests/roles/.keep
 tests/test.retry
+files/custom/*

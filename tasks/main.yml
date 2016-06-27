@@ -18,11 +18,16 @@
     apt: update_cache=yes
     when: stretch_sources_added.changed
 
-  - name: Ensure nginx is installed
-    apt:
-      name: "{{ nginx_package_name }}"
-      state: present
-      default_release: stretch
+  # - name: Ensure nginx is installed
+  #   apt:
+  #     name: "{{ nginx_package_name }}"
+  #     state: present
+  #     force: yes
+  #     default_release: stretch
+
+  - name: Temp install
+    command: apt-get install -yq nginx -t stretch -o APT::Force-LoopBreak=1
+    changed_when: false
 
   - name: Ensure nginx is started and enabled to start at boot.
     service: name=nginx state=started enabled=yes
