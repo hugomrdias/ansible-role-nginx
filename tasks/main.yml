@@ -32,6 +32,7 @@
   - name: Ensure nginx is started and enabled to start at boot.
     service: name=nginx state=started enabled=yes
 
+
   - name: Remove default configuration
     file:
       path: "{{ item }}"
@@ -51,6 +52,12 @@
     notify:
       - restart nginx
 
+  - name: Create dhparam
+    command: openssl dhparam -out {{nginx_dhparam_path}} {{nginx_dhparam_encryption_size}}
+    args:
+      creates: "{{nginx_dhparam_path}}"
+    when: nginx_dhparam_path is defined and nginx_dhparam_path
+    
   - name: Validate Nginx configuration
     shell: "nginx -t"
     register: result

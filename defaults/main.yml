@@ -10,7 +10,7 @@ nginx_worker_processes: auto
 nginx_worker_connections: 8000
 nginx_worker_rlimit_nofile: 8192
 nginx_multi_accept: "on"
-nginx_error_log: "/var/log/nginx/error.log info"
+nginx_error_log: "/var/log/nginx/error.log warn"
 nginx_pid: "/var/run/nginx.pid"
 nginx_access_log: "/var/log/nginx/access.log main buffer=16k"
 # nginx_access_log: "/var/log/nginx/access.log main"
@@ -33,3 +33,6 @@ nginx_open_file_cache: "max=1000 inactive=20s"
 nginx_open_file_cache_valid: 30s
 nginx_open_file_cache_min_uses: 5
 nginx_open_file_cache_errors: off
+
+nginx_dhparam_path:  False #"/etc/nginx/conf.d/ssl/dhparam.pem"
+nginx_dhparam_encryption_size: 2048

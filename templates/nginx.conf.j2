@@ -17,7 +17,7 @@ events {
 
 # Change these paths to somewhere that suits you!
 # [ debug | info | notice | warn | error | crit ]
-error_log {{ nginx_error_log}};
+error_log {{ nginx_error_log }};
 pid {{ nginx_pid }};
 
 http {
@@ -33,9 +33,13 @@ http {
     charset_types text/css text/plain text/vnd.wap.wml application/javascript application/json application/rss+xml application/xml;
 
     # Include $http_x_forwarded_for within default format used in log files
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                    '$status $body_bytes_sent "$http_referer" '
-                    '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main '$remote_addr - $remote_user [$time_local] "$request" '
+                     '$status $body_bytes_sent "$http_referer" '
+                     '"$http_user_agent" "$http_x_forwarded_for" '
+                     'rt=$request_time ua="$upstream_addr" '
+                     'us="$upstream_status" ut="$upstream_response_time" '
+                     'ul="$upstream_response_length" '
+                     'cs=$upstream_cache_status' ;
 
     # Log access to this file
     # This is only used when you don't override it on a server{} level
@@ -100,8 +104,11 @@ http {
         text/x-cross-domain-policy;
     # text/html is always compressed by HttpGzipModule
 
-    include /etc/nginx/conf.d/*.conf;
+    {% if nginx_cloudflare_ips_conf %}
+    include {{ nginx_cloudflare_ips_conf }};
+    {% endif %}
 
+    include /etc/nginx/conf.d/servers/*.conf;
     # server {
     #     listen       80;
     #

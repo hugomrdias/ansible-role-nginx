@@ -3,6 +3,15 @@
 
 This is for advanced users. This is only for Debian uses stretch sources to install nginx to enable http2 with ALPN support using openssh 1.0.2+
 
+A base ssl conf is available at `/etc/nginx/conf.d/ssl/ssl.conf` to be included although to be used you need to generate `dhparam` first with `openssl dhparam -out /etc/nginx/conf.d/ssl/dhparam.pem 2048` or 4096.
+After that you just need to add the following directives to each server and this should give you an A+ score in SSL Labs.
+
+```
+ssl_certificate /etc/nginx/conf.d/ssl/domain.chained.pem;
+ssl_certificate_key /etc/nginx/conf.d/ssl/domain.key;
+ssl_trusted_certificate /etc/nginx/conf.d/ssl/domain.chained.pem;
+```
+
 ## Requirements
 None   
 
