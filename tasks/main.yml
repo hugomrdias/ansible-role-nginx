@@ -48,7 +48,10 @@
       - restart nginx
 
   - name: Rsync files
-    copy: src=files/ dest=/etc/nginx/conf.d
+    synchronize:
+      src: files/
+      dest: /etc/nginx/conf.d
+      rsync_opts: '--no-owner --no-group'
     notify:
       - restart nginx
 
