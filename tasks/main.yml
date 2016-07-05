@@ -48,7 +48,7 @@
       - restart nginx
 
   - name: Rsync files
-    synchronize: src=files/ dest=/etc/nginx/conf.d
+    copy: src=files/ dest=/etc/nginx/conf.d
     notify:
       - restart nginx
 
