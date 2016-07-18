@@ -12,6 +12,12 @@ ssl_certificate_key /etc/nginx/conf.d/ssl/domain.key;
 ssl_trusted_certificate /etc/nginx/conf.d/ssl/domain.chained.pem;
 ```
 
+This role uses synchronize module so you need to enable sudo without password atleast for rsync
+```
+# file: /etc/sudoers
+%sudo   ALL=(ALL:ALL) ALL, NOPASSWD: /usr/bin/rsync
+```
+
 ## Requirements
 None   
 
