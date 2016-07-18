@@ -30,6 +30,13 @@
     changed_when: false
     when: nginx_custom is defined and nginx_custom == False
 
+  - name: Rsync files
+    synchronize:
+      src: files/custom
+      dest: /tmp
+      rsync_opts: '--no-owner --no-group'
+    when: nginx_custom is defined and nginx_custom
+
   - name: Install custom
     apt: deb={{ nginx_custom_path }}/{{ item }}
     with_items: "{{ nginx_custom_debs }}"
@@ -54,7 +61,7 @@
 
   - name: Rsync files
     synchronize:
-      src: files/
+      src: files/nginx-conf/
       dest: /etc/nginx/conf.d
       rsync_opts: '--no-owner --no-group'
     notify:
