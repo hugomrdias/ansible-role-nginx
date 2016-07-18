@@ -28,10 +28,15 @@
   - name: Temp install
     command: apt-get install -yq nginx -t stretch -o APT::Force-LoopBreak=1
     changed_when: false
+    when: nginx_custom is defined and nginx_custom == False
+
+  - name: Install custom
+    apt: deb={{ nginx_custom_path }}/{{ item }}
+    with_items: "{{ nginx_custom_debs }}"
+    when: nginx_custom is defined and nginx_custom
 
   - name: Ensure nginx is started and enabled to start at boot.
     service: name=nginx state=started enabled=yes
-
 
   - name: Remove default configuration
     file:
@@ -57,7 +62,7 @@
     args:
       creates: "{{nginx_dhparam_path}}"
     when: nginx_dhparam_path is defined and nginx_dhparam_path
-    
+
   - name: Validate Nginx configuration
     shell: "nginx -t"
     register: result
