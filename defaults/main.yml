@@ -5,7 +5,7 @@ nginx_user: root
 nginx_group: root
 nginx_distribution: mainline # mainline or stable
 nginx_package_name: nginx
-nginx_custom: True
+nginx_custom: False
 nginx_custom_path:  /tmp/nginx
 # these debs need to be already on the server
 nginx_custom_debs:
