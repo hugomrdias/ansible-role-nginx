@@ -1,7 +1,7 @@
 # ansible-role-nginx [![build status](https://gitlab.com/hugomrdias/ansible-role-nginx/badges/master/build.svg)](https://gitlab.com/hugomrdias/ansible-role-nginx/commits/master)
-> Role to install Thumbor in Debian systems
+> Role to install Nginx in Debian systems
 
-This is for advanced users. This is only for Debian uses stretch sources to install nginx to enable http2 with ALPN support using openssh 1.0.2+
+This is for advanced users. This is installs openssh 1.0.2+ from debian jessie-backports and nginx from the offical ubuntu xenial packages to enable http2 with ALPN support using openssh 1.0.2+
 
 A base ssl conf is available at `/etc/nginx/conf.d/ssl/ssl.conf` to be included although to be used you need to generate `dhparam` first with `openssl dhparam -out /etc/nginx/conf.d/ssl/dhparam.pem 2048` or 4096.
 After that you just need to add the following directives to each server and this should give you an A+ score in SSL Labs.
@@ -61,6 +61,9 @@ libnginx-mod-mail
 libnginx-mod-http-auth-pam
 libnginx-mod-stream
 nginx-full
+# offical sources
+nginx_*
+nginx-module*
 
 ```
 
