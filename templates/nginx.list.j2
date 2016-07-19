@@ -20,16 +20,20 @@ deb-src http://nginx.org/packages/ubuntu/ {{ansible_lsb.codename}} nginx
 
 {% if ansible_os_family == 'Debian' %}
 
-deb http://nginx.org/packages/mainline/debian/ {{ansible_lsb.codename}} nginx
-deb-src http://nginx.org/packages/mainline/debian/ {{ansible_lsb.codename}} nginx
+deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx
+deb-src http://nginx.org/packages/mainline/ubuntu/ xenial nginx
 
 {% endif %}
 
 {% if ansible_os_family == 'Ubuntu' %}
 
-deb http://nginx.org/packages/mainline/ubuntu/ {{ansible_lsb.codename}} nginx
-deb-src http://nginx.org/packages/mainline/ubuntu/ {{ansible_lsb.codename}} nginx
+deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx
+deb-src http://nginx.org/packages/mainline/ubuntu/ xenial nginx
 
 {% endif %}
 
 {% endif %}
+
+# jessie-backports, from stretch-level but with no dependencies
+deb http://httpredir.debian.org/debian/ jessie-backports main contrib non-free
+deb-src http://httpredir.debian.org/debian/ jessie-backports main contrib non-free

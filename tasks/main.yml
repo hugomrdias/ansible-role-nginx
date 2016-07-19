@@ -1,22 +1,40 @@
 ---
-  - name: add Debian strech stretch sources
-    template: src=stretch.list.j2 dest=/etc/apt/sources.list.d/stretch.list mode=0644
-    register: stretch_sources_added
+  # - name: Add Debian strech sources
+  #   template: src=stretch.list.j2 dest=/etc/apt/sources.list.d/stretch.list mode=0644
+  #   register: stretch_sources_added
+    # when: nginx_custom is defined and nginx_custom == False
 
-  - name: add apt pinning preferences files
-    template: src=preferences.j2 dest=/etc/apt/preferences mode=0644
+  # - name: Add apt pinning preferences files
+  #   template: src=preferences.j2 dest=/etc/apt/preferences mode=0644
+    # when: nginx_custom is defined and nginx_custom == False
 
-  # - name: add nginx official repo apt list file
-  #   template: src=nginx.list.j2 dest=/etc/apt/sources.list.d/nginx.list mode=0644
-  #   register: official_repo_added
+  - name: add nginx official repo apt list file
+    template: src=nginx.list.j2 dest=/etc/apt/sources.list.d/nginx.list mode=0644
+    register: official_repo_added
   #
-  # - name: add nginx official repo key
-  #   apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
-  #   when: official_repo_added.changed
+  - name: Add nginx official repo key
+    apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+    when: official_repo_added.changed
 
   - name: Update apt cache
     apt: update_cache=yes
-    when: stretch_sources_added.changed
+    when: official_repo_added.changed
+    # when: stretch_sources_added.changed
+
+  - name: Ensure openssl is installed
+    apt:
+      name: openssl
+      force: yes
+      state: latest
+      default_release: jessie-backports
+
+  - name: Ensure nginx is installed
+    apt:
+      name: nginx
+      # state: present
+      # force: yes
+      # default_release: stretch
+    when: nginx_custom is defined and nginx_custom == False
 
   # - name: Ensure nginx is installed
   #   apt:
@@ -25,10 +43,10 @@
   #     force: yes
   #     default_release: stretch
 
-  - name: Temp install
-    command: apt-get install -yq nginx -t stretch -o APT::Force-LoopBreak=1
-    changed_when: false
-    when: nginx_custom is defined and nginx_custom == False
+  # - name: Temp install
+  #   command: apt-get install -yq nginx -t stretch -o APT::Force-LoopBreak=1
+  #   changed_when: false
+  #   when: nginx_custom is defined and nginx_custom == False
 
   # - name: Rsync files
   #   synchronize:
@@ -37,9 +55,19 @@
   #     rsync_opts: '--no-owner --no-group'
   #   when: nginx_custom is defined and nginx_custom
 
+  # - name: Install custom
+  #   apt: deb={{ nginx_custom_path }}/{{ item }}
+  #   with_items: "{{ nginx_custom_debs }}"
+  #   when: nginx_custom is defined and nginx_custom
+
   - name: Install custom
-    apt: deb={{ nginx_custom_path }}/{{ item }}
+    shell: dpkg -i {{ nginx_custom_path }}/{{ item }}
     with_items: "{{ nginx_custom_debs }}"
+    when: nginx_custom is defined and nginx_custom
+    ignore_errors: yes
+
+  - name: Install custom dependencies
+    command: apt-get install -fy
     when: nginx_custom is defined and nginx_custom
 
   - name: Ensure nginx is started and enabled to start at boot.
