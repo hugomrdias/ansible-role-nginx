@@ -13,7 +13,7 @@ nginx_custom_debs:
   - nginx-module*
 nginx_delete_default: True
 nginx_worker_processes: auto
-nginx_worker_connections: 8000
+nginx_worker_connections: 1024
 nginx_worker_rlimit_nofile: 8192
 nginx_multi_accept: "on"
 nginx_error_log: "/var/log/nginx/error.log warn"
@@ -34,7 +34,7 @@ nginx_client_max_body_size: 20m
 nginx_types_hash_max_size: 2048
 nginx_server_names_hash_bucket_size: 64
 
-nginx_open_file_cache_enable: True
+nginx_open_file_cache_enable: false
 nginx_open_file_cache: "max=1000 inactive=20s"
 nginx_open_file_cache_valid: 30s
 nginx_open_file_cache_min_uses: 5
