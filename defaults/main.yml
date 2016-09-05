@@ -9,7 +9,7 @@ nginx_custom: False
 nginx_custom_path:  /tmp/nginx
 # these debs need to be already on the server
 nginx_custom_debs:
-  - nginx_1.11.2-1~xenial_amd64.deb
+  - nginx_*
   - nginx-module*
 nginx_delete_default: True
 nginx_worker_processes: auto
