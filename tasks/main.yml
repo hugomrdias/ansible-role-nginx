@@ -2,11 +2,18 @@
   - name: add nginx official repo apt list file
     template: src=nginx.list.j2 dest=/etc/apt/sources.list.d/nginx.list mode=0644
     register: official_repo_added
-    when: nginx_custom is defined and nginx_custom == False
+    when: nginx_custom != True
 
   - name: Add nginx official repo key
     apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
-    when: official_repo_added.changed and nginx_custom is defined and nginx_custom == False
+    when: official_repo_added.changed and nginx_custom != True
+
+  - name: Add jessie-backports for Debian
+    template:
+      src: jessie-backports.list.j2
+      dest: /etc/apt/sources.list.d/jessie-backports.list
+      mode: 0644
+    when: ansible_os_family == 'Debian'
 
   - name: Update apt cache
     apt: update_cache=yes
@@ -18,11 +25,12 @@
       force: yes
       state: latest
       default_release: jessie-backports
+    when: ansible_os_family == 'Debian'
 
   - name: Ensure nginx is installed
     apt:
       name: nginx
-    when: nginx_custom is defined and nginx_custom == False
+    when: nginx_custom != True
 
   - name: Install custom
     shell: dpkg -i {{ nginx_custom_path }}/{{ item }}
@@ -49,6 +57,7 @@
   - name: Write nginx.conf
     template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
     notify:
+      - validate nginx configuration
       - restart nginx
 
   - name: Rsync files
@@ -57,6 +66,7 @@
       dest: /etc/nginx/conf.d
       rsync_opts: '--no-owner --no-group'
     notify:
+      - validate nginx configuration
       - restart nginx
 
   - name: Create dhparam
@@ -64,9 +74,6 @@
     args:
       creates: "{{nginx_dhparam_path}}"
     when: nginx_dhparam_path is defined and nginx_dhparam_path
-
-  - name: Validate Nginx configuration
-    shell: "nginx -t"
-    register: result
-    changed_when: "result.rc != 0"
-    always_run: yes
+    notify:
+      - validate nginx configuration
+      - restart nginx

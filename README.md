@@ -53,20 +53,11 @@ https://github.com/slact/nchan/releases
 
 ```
 # package to install after rebuild
-nginx-common
-libnginx-mod-http-geoip
-libnginx-mod-http-image-filter
-libnginx-mod-http-xslt-filter
-libnginx-mod-mail
-libnginx-mod-http-auth-pam
-libnginx-mod-stream
-nginx-full
 # offical sources
 nginx_*
 nginx-module*
 
 ```
-
 
 ## License
 MIT © [Hugo Dias](http://hugodias.me)

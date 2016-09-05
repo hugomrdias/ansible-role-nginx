@@ -110,32 +110,4 @@ http {
     {% endif %}
 
     include /etc/nginx/conf.d/servers/*.conf;
-    # server {
-    #     listen       80;
-    #
-    #     location = /sub {
-    #         nchan_subscriber;
-    #         nchan_channel_id foobar;
-    #     }
-    #
-    #     location = /pub {
-    #         nchan_publisher;
-    #         nchan_channel_id foobar;
-    #     }
-    # }
-    # server {
-    # 	listen 80 default_server;
-    # 	listen [::]:80 default_server;
-    #
-    # 	root /var/www/html;
-    #
-    # 	index index.html index.htm index.nginx-debian.html;
-    #
-    # 	server_name _;
-    #
-    # 	location / {
-    # 		try_files $uri $uri/ =404;
-    # 	}
-    # }
-
 }
