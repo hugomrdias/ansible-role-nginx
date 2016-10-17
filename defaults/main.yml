@@ -22,13 +22,13 @@ nginx_access_log: "/var/log/nginx/access.log main buffer=16k"
 # nginx_access_log: "/var/log/nginx/access.log main"
 nginx_mime_file_path: "/etc/nginx/conf.d/mime.types"
 nginx_cloudflare_ips_conf: "/etc/nginx/conf.d/cloudflare-ips.conf"
-nginx_keepalive_timeout: 20s
+nginx_keepalive_timeout: 75
 nginx_keepalive_requests: 100000
 nginx_sendfile: "on"
 nginx_tcp_nopush: "on"
 nginx_tcp_nodelay: "on"
 
-nginx_client_body_buffer_size: 1m
+nginx_client_body_buffer_size: 128k
 nginx_client_max_body_size: 20m
 
 nginx_types_hash_max_size: 2048
