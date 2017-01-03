@@ -42,9 +42,6 @@
     command: apt-get install -fy
     when: nginx_custom is defined and nginx_custom
 
-  - name: Ensure nginx is started and enabled to start at boot.
-    service: name=nginx state=started enabled=yes
-
   - name: Remove default configuration
     file:
       path: "{{ item }}"
@@ -77,3 +74,6 @@
     notify:
       - validate nginx configuration
       - restart nginx
+
+  - name: Ensure nginx is started and enabled to start at boot.
+    service: name=nginx state=started enabled=yes
