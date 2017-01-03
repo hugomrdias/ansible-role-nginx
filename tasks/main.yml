@@ -13,7 +13,7 @@
       src: jessie-backports.list.j2
       dest: /etc/apt/sources.list.d/jessie-backports.list
       mode: 0644
-    when: ansible_os_family == 'Debian'
+    when: ansible_distribution == 'Debian'
 
   - name: Update apt cache
     apt: update_cache=yes
@@ -25,7 +25,7 @@
       force: yes
       state: latest
       default_release: jessie-backports
-    when: ansible_os_family == 'Debian'
+    when: ansible_distribution == 'Debian'
 
   - name: Ensure nginx is installed
     apt:

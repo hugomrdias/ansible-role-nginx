@@ -2,14 +2,14 @@
 
 {% if nginx_distribution == 'stable' %}
 
-{% if ansible_os_family == 'Debian' %}
+{% if ansible_distribution == 'Debian' %}
 
 deb http://nginx.org/packages/debian/ {{ansible_lsb.codename}} nginx
 deb-src http://nginx.org/packages/debian/ {{ansible_lsb.codename}} nginx
 
 {% endif %}
 
-{% if ansible_os_family == 'Ubuntu' %}
+{% if ansible_distribution == 'Ubuntu' %}
 
 deb http://nginx.org/packages/ubuntu/ {{ansible_lsb.codename}} nginx
 deb-src http://nginx.org/packages/ubuntu/ {{ansible_lsb.codename}} nginx
@@ -18,14 +18,14 @@ deb-src http://nginx.org/packages/ubuntu/ {{ansible_lsb.codename}} nginx
 
 {% else %}
 
-{% if ansible_os_family == 'Debian' %}
+{% if ansible_distribution == 'Debian' %}
 
 deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx
 deb-src http://nginx.org/packages/mainline/ubuntu/ xenial nginx
 
 {% endif %}
 
-{% if ansible_os_family == 'Ubuntu' %}
+{% if ansible_distribution == 'Ubuntu' %}
 
 deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx
 deb-src http://nginx.org/packages/mainline/ubuntu/ xenial nginx
