@@ -55,7 +55,6 @@ https://github.com/slact/nchan/releases
 # package to install after rebuild
 # offical sources
 nginx_*
-nginx-module*
 
 ```
 

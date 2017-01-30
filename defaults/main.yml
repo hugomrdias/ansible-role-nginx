@@ -10,7 +10,6 @@ nginx_custom_path:  /tmp/nginx
 # these debs need to be already on the server
 nginx_custom_debs:
   - nginx_*
-  - nginx-module*
 nginx_delete_default: True
 nginx_worker_processes: auto
 nginx_worker_connections: 1024
@@ -40,5 +39,5 @@ nginx_open_file_cache_valid: 30s
 nginx_open_file_cache_min_uses: 5
 nginx_open_file_cache_errors: off
 
-nginx_dhparam_path:  False #"/etc/nginx/conf.d/ssl/dhparam.pem"
+nginx_dhparam_path: False #"/etc/nginx/conf.d/ssl/dhparam.pem"
 nginx_dhparam_encryption_size: 2048

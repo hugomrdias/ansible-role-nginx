@@ -4,5 +4,8 @@
   become: yes
   gather_facts: yes
 
+  pre_tasks:
+    - name: test
+      debug: msg="{{ ansible_distribution | lower }} {{ ansible_distribution_release }}"
   roles:
     - ansible-role-nginx
