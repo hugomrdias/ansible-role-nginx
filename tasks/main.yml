@@ -1,4 +1,8 @@
 ---
+  - name: Remove Apache2
+    become: yes
+    apt: name=apache2 state=absent
+
   - name: add nginx official repo apt list file
     template: src=nginx.list.j2 dest=/etc/apt/sources.list.d/nginx.list mode=0644
     register: official_repo_added
