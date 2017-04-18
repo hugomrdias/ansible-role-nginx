@@ -61,7 +61,9 @@
     synchronize:
       src: files/nginx-conf/
       dest: /etc/nginx/conf.d
-      rsync_opts: '--no-owner --no-group'
+      rsync_opts: 
+        - '--no-owner'
+        - '--no-group'
     notify:
       - validate nginx configuration
       - restart nginx
